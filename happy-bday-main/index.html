@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Babe's day</title>
+  <style>
+    :root {
+      --primary-color: #0d47a1;
+      --accent-color: #42a5f5;
+      --bg-color: #f5faff;
+      --text-color: #1a237e;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      max-width: 500px;
+      background-color: white;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      border-radius: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    img {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #2196f3;
+    }
+
+    #letter {
+      display: none;
+      animation: slideUp 2s forwards;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .hidden { display: none; }
+
+    .back-btn {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background-color: var(--primary-color);
+      padding: 8px 12px;
+      font-size: 14px;
+      border-radius: 6px;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+  <div id="page1" class="container">
+    <h1>Bae’s birthday is coming up soon — my cutie penguin 🐧💖</h1>
+    <img id="birthdayImage" src="01.jpeg" alt="Doraemon">
+    <h2 id="countdown"></h2>
+    <button id="toPage2" class="hidden">Next</button>
+  </div>
+
+  <div id="page2" class="container hidden">
+    <button class="back-btn" onclick="showPage('page1')">Home</button>
+    <img src="022.jpeg" width="150" alt="Envelope">
+    <div id="letter">
+      <p>
+ขออำนาจคุณพระศรีรัตนตรัย และคุณพระแก้วมรกต  
+ดลบันดาลให้หนูมีแต่ความสุขสมหวังในทุก ๆ เรื่อง  
+วันเกิดปีนี้ขอให้สดใส มีแต่เรื่องดี ๆ เข้ามานะค้าบ  
+
+ขอให้หนูเป็นคนสวย รวย เก่ง ยอดขายปังเดือนละ 100 คันไปเลย!  
+แล้วก็น่ารักแบบนี้ไปเรื่อย ๆ ไอ้ต้าวแพนกวิ้นของเค้า 🐧💖  
+
+ไม่ว่าจะเจออะไร ก็ขอให้หนูผ่านไปได้อย่างมั่นใจ  
+เหมือนที่หนูเป็นอยู่เสมอเลยนะ  
+
+<br><br>
+
+Honestly, having you in my life is the best thing that ever happened to me.  
+#ILYSB:) กลับมาหาเค้าเมื่อไหร่ก็ได้นะ เค้าจะรอ🤍
+</p>
+
+      <button onclick="showPage('page3')">Next</button>
+    </div>
+  </div>
+
+  <div id="page3" class="container hidden">
+    <button class="back-btn" onclick="showPage('page1')">Home</button>
+    <h2>Jubbbbb 😄</h2>
+    <video width="100%" controls autoplay muted loop>
+      <source src="767090581.303630.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <script>
+    function countdown() {
+      const countdownElement = document.getElementById("countdown");
+      const targetDate = new Date("2026-04-25T10:31:00").getTime();
+      //const targetDate = new Date("2025-04-01T10:31:00").getTime();
+
+      const interval = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0) {
+          clearInterval(interval);
+          countdownElement.innerHTML = "Happy birthday!";
+          document.getElementById("toPage2").classList.remove("hidden");
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        countdownElement.innerHTML = `${days} วัน ${hours} ชม. ${minutes} นาที ${seconds} วิ`;
+      }, 1000);
+    }
+
+    function showPage(id) {
+      document.querySelectorAll('.container').forEach(el => el.classList.add('hidden'));
+      document.getElementById(id).classList.remove('hidden');
+      if (id === 'page2') {
+        setTimeout(() => document.getElementById('letter').style.display = 'block', 1000);
+      } else {
+        document.getElementById('letter').style.display = 'none';
+      }
+    }
+
+    document.getElementById("toPage2").addEventListener("click", () => showPage("page2"));
+
+    countdown();
+  </script>
+</body>
+</html>

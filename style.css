@@ -1,0 +1,542 @@
+/* ===== CSS VARIABLES ===== */
+:root {
+  --rose:       #e8a0b0;
+  --rose-deep:  #c2637a;
+  --rose-pale:  #fce8ed;
+  --blush:      #f9d6df;
+  --cream:      #fdf6f0;
+  --gold:       #c9a96e;
+  --gold-pale:  #f5e9d4;
+  --text-dark:  #3a1f2b;
+  --text-mid:   #7a4a5a;
+  --text-light: #b07a8a;
+  --white:      #ffffff;
+  --shadow:     rgba(200, 100, 130, 0.15);
+  --radius:     20px;
+  --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Soft petal background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(232,160,176,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 90% 80%, rgba(201,169,110,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 50% 50%, rgba(252,232,237,0.3) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#app {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* ===== CARD ===== */
+.card {
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(232,160,176,0.3);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 60px var(--shadow), 0 4px 16px rgba(0,0,0,0.06);
+  padding: 56px 48px;
+  max-width: 1000px;
+  width: 100%;
+  text-align: center;
+  animation: cardIn 0.6s var(--transition) both;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
+/* ===== TYPOGRAPHY ===== */
+.display {
+  font-family: 'Playfair Display', serif;
+  color: var(--text-dark);
+}
+
+h1.display { font-size: clamp(1.8rem, 5vw, 2.4rem); line-height: 1.2; }
+h2.display { font-size: clamp(1.4rem, 4vw, 1.9rem); line-height: 1.25; }
+
+p.body-text {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--text-mid);
+}
+
+p.caption {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  letter-spacing: 0.06em;
+}
+
+em { font-style: italic; color: var(--rose-deep); }
+
+/* ===== DIVIDER ===== */
+.divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--rose), transparent);
+  margin: 18px auto;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-block;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all var(--transition);
+  letter-spacing: 0.04em;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--rose-deep), #e07090);
+  color: white;
+  box-shadow: 0 6px 20px rgba(194,99,122,0.35);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(194,99,122,0.45);
+}
+
+.btn-secondary {
+  background: var(--gold-pale);
+  color: var(--gold);
+  border: 1px solid var(--gold);
+}
+.btn-secondary:hover {
+  background: var(--gold);
+  color: white;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* ===== COUNTDOWN PAGE ===== */
+.countdown-grid {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 28px 0;
+  flex-wrap: wrap;
+}
+
+.count-box {
+  background: var(--rose-pale);
+  border: 1px solid rgba(232,160,176,0.4);
+  border-radius: 14px;
+  padding: 14px 18px;
+  min-width: 72px;
+}
+
+.count-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  color: var(--rose-deep);
+  line-height: 1;
+  display: block;
+}
+
+.count-label {
+  font-size: 0.7rem;
+  color: var(--text-light);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 4px;
+  display: block;
+}
+
+.penguin-icon {
+  font-size: 3.5rem;
+  display: block;
+  margin: 0 auto 16px;
+  animation: wobble 2.5s ease-in-out infinite;
+}
+
+@keyframes wobble {
+  0%,100% { transform: rotate(-6deg); }
+  50%      { transform: rotate(6deg);  }
+}
+
+/* ===== PASSWORD PAGE ===== */
+.lock-icon { font-size: 3rem; margin-bottom: 12px; display: block; }
+
+.pin-input {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 24px 0;
+}
+
+.pin-digit {
+  width: 44px;
+  height: 54px;
+  border: 2px solid rgba(232,160,176,0.5);
+  border-radius: 10px;
+  background: var(--rose-pale);
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color var(--transition);
+  caret-color: var(--rose-deep);
+}
+
+.pin-digit:focus { border-color: var(--rose-deep); }
+
+.error-msg {
+  color: #c0392b;
+  font-size: 0.85rem;
+  margin-top: 8px;
+  min-height: 20px;
+  transition: opacity 0.3s;
+}
+
+/* ===== GREETING PAGE ===== */
+.greeting-body {
+  text-align: left;
+  line-height: 2;
+  font-size: 0.95rem;
+  color: var(--text-mid);
+  padding: 10px 0;
+  white-space: pre-line;
+}
+
+.confetti-wrap {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 8px;
+  height: 12px;
+  top: -20px;
+  animation: confettiFall linear forwards;
+  border-radius: 2px;
+}
+
+@keyframes confettiFall {
+  to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* ===== MEMORY CARD GAME ===== */
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 24px 0;
+}
+
+.mem-card {
+  aspect-ratio: 1;
+  perspective: 600px;
+  cursor: pointer;
+}
+
+.mem-card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.45s;
+  border-radius: 12px;
+}
+
+.mem-card.flipped .mem-card-inner { transform: rotateY(180deg); }
+.mem-card.matched .mem-card-inner { transform: rotateY(180deg); }
+
+.mem-card-front,
+.mem-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+}
+
+.mem-card-front {
+  background: linear-gradient(135deg, var(--rose-pale), var(--blush));
+  border: 1.5px solid rgba(232,160,176,0.4);
+  font-size: 1.4rem;
+  color: var(--rose);
+}
+
+.mem-card-back {
+  background: var(--white);
+  border: 1.5px solid rgba(232,160,176,0.35);
+  transform: rotateY(180deg);
+  overflow: hidden;
+}
+
+.mem-card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mem-card.matched .mem-card-back {
+  background: linear-gradient(135deg, #ffeef4, #fff5e0);
+  border-color: var(--gold);
+}
+
+.game-status {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+
+/* ===== BALLOON PAGE ===== */
+.balloon-stage {
+  position: relative;
+  height: 340px;
+  overflow: hidden;
+  margin: 20px -10px;
+}
+
+.balloon {
+  position: absolute;
+  bottom: -80px;
+  font-size: 2.8rem;
+  cursor: pointer;
+  animation: floatUp linear forwards;
+  transition: transform 0.2s, opacity 0.2s;
+  user-select: none;
+  filter: drop-shadow(0 4px 8px rgba(200,100,130,0.3));
+}
+
+.balloon:hover { transform: scale(1.15); }
+
+@keyframes floatUp {
+  0%   { bottom: -80px; opacity: 1; }
+  100% { bottom: 110%; opacity: 0.7; }
+}
+
+.balloon.popped {
+  animation: pop 0.3s ease-out forwards !important;
+  cursor: default;
+  pointer-events: none;
+}
+
+@keyframes pop {
+  0%  { transform: scale(1.2); opacity: 1; }
+  50% { transform: scale(1.6); opacity: 0.6; }
+  100%{ transform: scale(0);   opacity: 0; }
+}
+
+/* Backdrop */
+.wish-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(250, 235, 240, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 199;
+  animation: wishBdIn 0.25s ease forwards;
+}
+
+@keyframes wishBdIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* Centered wish card */
+.wish-bubble {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.85);
+  background: rgba(255, 255, 255, 0.98);
+  border: 1.5px solid var(--rose);
+  border-radius: 20px;
+  padding: 28px 32px;
+  font-size: 0.92rem;
+  color: var(--text-mid);
+  width: min(420px, 90vw);
+  text-align: center;
+  pointer-events: auto;
+  z-index: 200;
+  box-shadow: 0 20px 60px rgba(200, 100, 130, 0.25), 0 4px 16px rgba(0,0,0,0.06);
+  animation: wishAppear 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  line-height: 1.9;
+}
+
+.wish-text {
+  white-space: pre-line;
+  margin-bottom: 18px;
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  line-height: 1.9;
+}
+
+.wish-close-btn {
+  display: inline-block;
+  padding: 7px 22px;
+  border: 1px solid var(--rose);
+  border-radius: 50px;
+  background: var(--rose-pale);
+  color: var(--rose-deep);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.wish-close-btn:hover {
+  background: var(--rose);
+  color: white;
+}
+
+@keyframes wishAppear {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.75); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+@keyframes wishFade   { to { opacity: 0; } }
+
+.balloon-count { font-size: 0.85rem; color: var(--text-light); }
+
+/* ===== SLIDING PUZZLE ===== */
+.puzzle-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.puzzle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 6px;
+  width: min(390px, 88vw);
+  height: min(390px, 88vw);
+  background: var(--rose-pale);
+  border-radius: 14px;
+  padding: 6px;
+  border: 1px solid rgba(232,160,176,0.4);
+  box-shadow: 0 8px 24px var(--shadow);
+}
+
+.tile {
+  background: linear-gradient(135deg, var(--white), var(--blush));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.2s;
+  border: 1px solid rgba(232,160,176,0.25);
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.tile:hover:not(.empty-tile) { transform: scale(0.96); }
+
+.tile.empty-tile {
+  background: var(--rose-pale);
+  cursor: default;
+  border: 2px dashed rgba(232,160,176,0.3);
+}
+
+.tile-num {
+  position: absolute;
+  bottom: 3px;
+  right: 5px;
+  font-size: 0.6rem;
+  color: var(--text-light);
+  font-family: 'Playfair Display', serif;
+}
+
+.puzzle-moves { font-size: 0.85rem; color: var(--text-light); }
+
+/* ===== FINAL PAGE — VIDEO ===== */
+#bday-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #000;
+  border-radius: 14px;
+  outline: none;
+}
+
+/* Custom video controls accent */
+#bday-video:focus-visible {
+  box-shadow: 0 0 0 3px var(--rose);
+}
+
+/* ===== FLOATING PETALS ===== */
+.petals-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.petal {
+  position: absolute;
+  top: -30px;
+  font-size: 1rem;
+  opacity: 0;
+  animation: petalFall linear infinite;
+}
+
+@keyframes petalFall {
+  0%   { top: -30px; opacity: 0;   transform: rotate(0deg) translateX(0); }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.4; }
+  100% { top: 110vh;  opacity: 0;   transform: rotate(360deg) translateX(40px); }
+}
+
+/* ===== UTILITIES ===== */
+.mt-sm { margin-top: 10px; }
+.mt-md { margin-top: 20px; }
+.mt-lg { margin-top: 30px; }
+
+.hidden { display: none !important; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .card { padding: 36px 22px; }
+  .memory-grid { gap: 7px; }
+  .count-num { font-size: 1.8rem; }
+  .count-box { min-width: 58px; padding: 10px 12px; }
+  .puzzle-horizontal-layout { flex-direction: column; align-items: center; gap: 24px; }
+  .puzzle-preview-side, .puzzle-game-side { flex: unset !important; width: 100%; }
+}
