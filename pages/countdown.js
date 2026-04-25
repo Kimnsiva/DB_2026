@@ -50,8 +50,10 @@ export function renderCountdown(app) {
       hEl.textContent = '00';
       mEl.textContent = '00';
       sEl.textContent = '00';
-      nextBtn.classList.remove('hidden');
-      nextBtn.addEventListener('click', () => navigate(renderPassword));
+      // nextBtn.classList.remove('hidden');
+      // nextBtn.addEventListener('click', () => navigate(renderPassword));
+      // เปลี่ยนเป็นให้เด้งเข้าหน้าใส่รหัสอัตโนมัติเลย ตามที่คุณผู้ใช้ต้องการ
+      navigate(renderPassword);
     }
   );
 }
