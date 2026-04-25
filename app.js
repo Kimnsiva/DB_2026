@@ -1,6 +1,6 @@
 // app.js — entry point
 import { navigate }        from './utils/router.js';
-import { renderCountdown } from './pages/countdown.js';
+import { renderPassword } from './pages/password.js';
 
 // Floating petals background
 function initPetals() {
@@ -30,4 +30,4 @@ function initPetals() {
 initPetals();
 
 // Kick off the app on the countdown page
-navigate(renderCountdown);
+navigate(renderPassword);
