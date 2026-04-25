@@ -4,7 +4,8 @@ import { navigate } from '../utils/router.js';
 import { renderPassword } from './password.js';
 
 export function renderCountdown(app) {
-  const target = getNextBirthdayDate(4, 25, 10, 31);
+  // const target = getNextBirthdayDate(4, 25, 10, 31);
+  const target = new Date(Date.now() + 5000);
 
   app.innerHTML = `
     <div class="card">
