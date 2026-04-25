@@ -8,8 +8,16 @@ export function getNextBirthdayDate(month = 4, day = 25, hour = 10, minute = 31)
   // month is 1-based here; Date uses 0-based
   let target = new Date(year, month - 1, day, hour, minute, 0, 0);
 
-  if (now >= target) {
-    // Already passed this year → use next year
+  // Compare only calendar dates (ignore time-of-day) so that on the birthday
+  // itself — even if the exact birth-time has already passed — we still return
+  // the current-year target.  startCountdown() will see diff <= 0 and call
+  // onDone() immediately, showing the "Happy Birthday" screen instead of
+  // counting down 365 more days.
+  const todayDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const targetDate = new Date(year, month - 1, day);
+
+  if (todayDate > targetDate) {
+    // Birthday has fully passed (different calendar day) → use next year
     target = new Date(year + 1, month - 1, day, hour, minute, 0, 0);
   }
 
