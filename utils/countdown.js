@@ -17,8 +17,8 @@ export function getNextBirthdayDate(month = 4, day = 25, hour = 10, minute = 31)
   const targetDate = new Date(year, month - 1, day);
 
   if (todayDate > targetDate) {
-    // Birthday has fully passed (different calendar day) → use next year
-    target = new Date(year + 1, month - 1, day, hour, minute, 0, 0);
+    // Birthday has fully passed (different calendar day) 
+    // target = new Date(year + 1, month - 1, day, hour, minute, 0, 0);
   }
 
   return target;
