@@ -52,7 +52,7 @@ export function renderBalloons(app) {
     el.textContent = BALLOON_EMOJIS[i % BALLOON_EMOJIS.length];
 
     const left = 15 + Math.random() * 60; // keep away from edges
-    const dur  = 10 + Math.random() * 6;  // 10-16s per loop
+    const dur  = 6 + Math.random() * 4;  // 6-10s per loop (เร็วขึ้น)
 
     el.style.cssText = `
       left:${left}%;
